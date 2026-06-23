@@ -51,14 +51,14 @@ class JolteonCharacter extends Character
 		offset.set();
 		origin.set(width * 0.5, height * 0.5);
 
-		body = makePart('body');
-		gunarm = makePart('gunarm');
-		tail = makePart('tail');
-		headIdle = makePart('headidle');
-		headLeft = makePart('headleft');
-		headRight = makePart('headright');
-		headUp = makePart('headup');
-		headDown = makePart('headdown');
+		body = makePart('characters/jolteon/body');
+		gunarm = makePart('characters/jolteon/gunarm');
+		tail = makePart('characters/jolteon/tail');
+		headIdle = makePart('characters/jolteon/headidle');
+		headLeft = makePart('characters/jolteon/headleft');
+		headRight = makePart('characters/jolteon/headright');
+		headUp = makePart('characters/jolteon/headup');
+		headDown = makePart('characters/jolteon/headdown');
 
 		allParts = [tail, gunarm, body, headIdle, headLeft, headRight, headUp, headDown];
 		headParts = [headIdle, headLeft, headRight, headUp, headDown];
