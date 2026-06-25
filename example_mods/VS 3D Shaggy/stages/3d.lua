@@ -1,5 +1,18 @@
 local shadname = "glitchEffect";
+-- Object settings
+local objName = 'van'
 
+local startX = -300        -- starting X (off-screen left)
+local endX = 1600          -- end X (off-screen right, adjust for your resolution)
+local startY = 300         -- base Y position
+local floatAmplitude = 20  -- pixels up/down
+local floatSpeed = 2       -- vertical bob speed
+local moveSpeed = 200      -- horizontal speed (pixels per second)
+
+-- INTERNAL
+local elapsedTime = 0
+local objWidth = 0
+local screenW = 1280 -- default Psych Engine width, change if using widescreen
 function onCreate()
     initLuaShader(shadname)
 
@@ -31,4 +44,24 @@ end
 function onUpdatePost(elapsed)
 	setShaderFloat('sprite1', 'uTime', os.clock())
 	setShaderFloat('sprite3', 'uTime', os.clock())
+end
+
+function onUpdate(elapsed)
+    elapsedTime = elapsedTime + elapsed
+
+    -- Bobbing motion
+    local bobY = startY + math.sin(elapsedTime * floatSpeed) * floatAmplitude
+    setProperty(objName .. '.y', bobY)
+
+    -- Move horizontally
+    local newX = getProperty(objName .. '.x') + moveSpeed * elapsed
+    setProperty(objName .. '.x', newX)
+
+    -- Reset only when the object is fully offscreen right
+    if newX > screenW then
+        if newX - startX > screenW + objWidth then
+            setProperty(objName .. '.x', startX)
+            elapsedTime = 0
+        end
+    end
 end
