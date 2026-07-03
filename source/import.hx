@@ -7,10 +7,12 @@ import backend.Discord;
 //Psych
 #if LUA_ALLOWED
 // NOTE: linc_luajit currently fails when compiled for neko due to cpp.RawPointer.
-// Keep Lua imports enabled only when compiling with cpp.
+// Gate Lua imports so neko builds don't even see llua.*.
 #if cpp
 import llua.*;
 import llua.Lua;
+#else
+// no-op
 #end
 #end
 
