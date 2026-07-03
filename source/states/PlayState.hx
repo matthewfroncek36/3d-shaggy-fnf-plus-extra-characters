@@ -35,7 +35,7 @@ import openfl.filters.ShaderFilter;
 
 import shaders.ErrorHandledShader;
 
-#if VIDEOS_ALLOWED
+#if (VIDEOS_ALLOWED && cpp)
 import objects.VideoSprite;
 #end
 import objects.Note.EventNote;
