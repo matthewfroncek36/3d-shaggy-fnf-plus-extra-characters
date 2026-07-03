@@ -122,7 +122,7 @@ class MobileFunctions
 			if (addToCustomSubstate)
 			{
 				if (// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */ != null || !PlayState.instance.members.contains(// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */))
-					CustomSubstate.insertLuaTpad(posAtCustomSubstate);
+					CustomSubstate.insertLuaTouchPad(posAtCustomSubstate);
 			}
 			else
 				// // PlayState.instance.addLuaTouchPad /* auto-disabled */ /* auto-disabled */();
