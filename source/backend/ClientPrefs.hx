@@ -84,7 +84,13 @@ import states.TitleState;
 	public var controlsAlpha:Float = #if mobile 0.6 #else 0.001 #end;
 	public var mobileControlsType:String = 'hitbox'; // hitbox, dpad, none
 	public var spaceExtend:Bool = false;
+
+	// Android hitbox controls prefs
+	public var hitboxalpha:Float = 0.6;
+	public var globalAntialiasing:Bool = true;
+	public var hitboxmode:Bool = true;
 }
+
 
 class ClientPrefs {
 	public static var data:SaveVariables = {};
