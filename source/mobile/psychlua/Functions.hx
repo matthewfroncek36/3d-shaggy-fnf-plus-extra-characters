@@ -118,65 +118,65 @@ class MobileFunctions
 
 		Lua_helper.add_callback(lua, "addTouchPad", (DPadMode:String, ActionMode:String, ?addToCustomSubstate:Bool = false, ?posAtCustomSubstate:Int = -1) ->
 		{
-			// // PlayState.instance.makeLuaTouchPad /* auto-disabled */ /* auto-disabled */(DPadMode, ActionMode);
+			PlayState.instance.makeLuaTouchPad(DPadMode, ActionMode);
 			if (addToCustomSubstate)
 			{
-				if (// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */ != null || !PlayState.instance.members.contains(// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */))
+				if (PlayState.instance.luaTouchPad != null || !PlayState.instance.members.contains(PlayState.instance.luaTouchPad))
 					CustomSubstate.insertLuaTouchPad(posAtCustomSubstate);
 			}
 			else
-				// // PlayState.instance.addLuaTouchPad /* auto-disabled */ /* auto-disabled */();
+				PlayState.instance.addLuaTouchPad();
 		});
 
 		Lua_helper.add_callback(lua, "removeTouchPad", () ->
 		{
-			// // PlayState.instance.removeLuaTouchPad /* auto-disabled */ /* auto-disabled */();
+			PlayState.instance.removeLuaTouchPad();
 		});
 
 		Lua_helper.add_callback(lua, "addTouchPadCamera", () ->
 		{
-			if (// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */ == null)
+			if (PlayState.instance.luaTouchPad == null)
 			{
 				FunkinLua.luaTrace('addTouchPadCamera: Touch Pad does not exist.');
 				return;
 			}
-			// // // PlayState.instance.addLuaTouchPad /* auto-disabled */ /* auto-disabled */Camera /* auto-disabled */();
+			PlayState.instance.addLuaTouchPadCamera();
 		});
 
 		Lua_helper.add_callback(lua, "touchPadJustPressed", function(button:Dynamic):Bool
 		{
-			if (// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */ == null)
+			if (PlayState.instance.luaTouchPad == null)
 			{
 				return false;
 			}
-			return // // // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */JustPressed /* auto-disabled */(button);
+			return PlayState.instance.luaTouchPadJustPressed(button);
 		});
 
 		Lua_helper.add_callback(lua, "touchPadPressed", function(button:Dynamic):Bool
 		{
-			if (// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */ == null)
+			if (PlayState.instance.luaTouchPad == null)
 			{
 				return false;
 			}
-			return // // // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */Pressed /* auto-disabled */(button);
+			return PlayState.instance.luaTouchPadPressed(button);
 		});
 
 		Lua_helper.add_callback(lua, "touchPadJustReleased", function(button:Dynamic):Bool
 		{
-			if (// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */ == null)
+			if (PlayState.instance.luaTouchPad == null)
 			{
 				return false;
 			}
-			return // // // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */JustReleased /* auto-disabled */(button);
+			return PlayState.instance.luaTouchPadJustReleased(button);
 		});
 
 		Lua_helper.add_callback(lua, "touchPadReleased", function(button:Dynamic):Bool
 		{
-			if (// // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */ == null)
+			if (PlayState.instance.luaTouchPad == null)
 			{
 				return false;
 			}
-			return // // // PlayState.instance.luaTouchPad /* auto-disabled */ /* auto-disabled */Released /* auto-disabled */(button);
+			return PlayState.instance.luaTouchPadReleased(button);
 		});
 
 		Lua_helper.add_callback(lua, "touchJustPressed", TouchUtil.justPressed);
