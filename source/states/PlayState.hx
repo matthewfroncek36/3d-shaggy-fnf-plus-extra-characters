@@ -35,7 +35,9 @@ import openfl.filters.ShaderFilter;
 
 import shaders.ErrorHandledShader;
 
+#if VIDEOS_ALLOWED
 import objects.VideoSprite;
+#end
 import objects.Note.EventNote;
 import objects.*;
 import states.stages.*;
