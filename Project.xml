@@ -195,4 +195,11 @@
 	<icon path="art/icons/icon32.png" size='32'/>
 	<icon path="art/icons/icon64.png" size='64'/>
 	<icon path="art/icons/iconOG.png" />
+
+	<!-- iOS build fixes -->
+    <haxedef name="IPHONEOS_DEPLOYMENT_TARGET" value="12.0" />
+
+    <ios>
+        <xcodeconfig name="disable_signing.xcconfig" />
+    </ios>
 </project>
