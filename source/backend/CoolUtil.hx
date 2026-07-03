@@ -180,4 +180,10 @@ class CoolUtil
 				text.borderStyle = NONE;
 		}
 	}
+
+	public static function showPopUp(message:String, title:String):Void
+	{
+		// Stubbed popup for mobile; original Psych Engine may use browserPopUp or native dialogs.
+	}
+
 }

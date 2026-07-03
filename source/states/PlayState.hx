@@ -4027,4 +4027,16 @@ class PlayState extends MusicBeatState
 		#end
 		return false;
 	}
+
+	public var luaTouchPad:Dynamic = null;
+
+	public function addLuaTouchPad():Void {}
+	public function removeLuaTouchPad():Void {}
+	public function addLuaTouchPadCamera():Void {}
+
+	public function luaTouchPadJustPressed(button:Int):Bool return false;
+	public function luaTouchPadPressed(button:Int):Bool return false;
+	public function luaTouchPadJustReleased(button:Int):Bool return false;
+	public function luaTouchPadReleased(button:Int):Bool return false;
+
 }
