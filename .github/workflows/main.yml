@@ -137,10 +137,10 @@ jobs:
         run: |
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
-          haxelib install extension-videoview 1.0.1t
           chmod +x ./setup/unix.sh
           sh ./setup/unix.sh
-          haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-androidtools.git
+          haxelib install extension-videoview
+          haxelib install extension-androidtools
           haxelib remove linc_luajit
           haxelib git linc_luajit https://github.com/jigsaw-4277821/linc_luajit.git
 
