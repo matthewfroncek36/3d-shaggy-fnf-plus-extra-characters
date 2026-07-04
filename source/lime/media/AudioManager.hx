@@ -37,7 +37,7 @@ class AudioManager
 					var alc = context.openal;
 
 					#if (lime_openal && !ios)
-					ALSoftConfig.init();
+ALSoftConfig.__init__();
 					#end
 					var device = alc.openDevice();
 					var ctx = alc.createContext(device);
