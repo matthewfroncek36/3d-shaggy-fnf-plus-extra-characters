@@ -265,7 +265,7 @@ class HScript extends Iris
 		set('StrumNote', objects.StrumNote);
 		set('NoteSplash', objects.NoteSplash);
 		set('Highscore', backend.Highscore);
-		set('DiscordClient', backend.DiscordClient);
+		set('Discord', backend.Discord);
 		set('Mods', backend.Mods);
 		set('StageData', backend.StageData);
 		set('Difficulty', backend.Difficulty);
