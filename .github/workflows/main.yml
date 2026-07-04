@@ -141,8 +141,6 @@ jobs:
           sh ./setup/unix.sh
           haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-androidtools.git
           haxelib install extension-videoview
-          haxelib remove linc_luajit
-          haxelib git linc_luajit https://github.com/jigsaw-4277821/linc_luajit.git
 
       - name: Setup Lime
         run: |
@@ -180,8 +178,6 @@ jobs:
           chmod +x ./setup/unix.sh
           sh ./setup/unix.sh
           haxelib install extension-videoview
-          haxelib remove linc_luajit
-          haxelib git linc_luajit https://github.com/jigsaw-4277821/linc_luajit.git
 
       - name: Skip SScript setup mode
         run: echo 'oy9:showMacroty8:loopCosti25y10:includeAllfg' >> ~/settings.cocoa
