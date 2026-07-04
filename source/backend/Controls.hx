@@ -262,6 +262,89 @@ class Controls
 	}
 	#end
 
+	public var isInSubstate:Bool = false; // don't worry about this it becomes true and false on it's own in MusicBeatSubstate
+	public var requestedInstance(get, default):Dynamic; // is set to MusicBeatState or MusicBeatSubstate when the constructor is called
+	public var requestedMobileC(get, default):IMobileControls; // for PlayState and EditorPlayState (hitbox and touchPad)
+	public var mobileC(get, never):Bool;
+
+	private function touchPadPressed(keys:Array<MobileInputID>):Bool
+	{
+		if (keys != null && requestedInstance.touchPad != null)
+			if (requestedInstance.touchPad.anyPressed(keys) == true)
+				return true;
+
+		return false;
+	}
+
+	private function touchPadJustPressed(keys:Array<MobileInputID>):Bool
+	{
+		if (keys != null && requestedInstance.touchPad != null)
+			if (requestedInstance.touchPad.anyJustPressed(keys) == true)
+				return true;
+
+		return false;
+	}
+
+	private function touchPadJustReleased(keys:Array<MobileInputID>):Bool
+	{
+		if (keys != null && requestedInstance.touchPad != null)
+			if (requestedInstance.touchPad.anyJustReleased(keys) == true)
+				return true;
+
+		return false;
+	}
+
+	private function mobileCPressed(keys:Array<MobileInputID>):Bool
+	{
+		if (keys != null && requestedMobileC != null)
+			if (requestedMobileC.instance.anyPressed(keys))
+				return true;
+
+		return false;
+	}
+
+	private function mobileCJustPressed(keys:Array<MobileInputID>):Bool
+	{
+		if (keys != null && requestedMobileC != null)
+			if (requestedMobileC.instance.anyJustPressed(keys))
+				return true;
+
+		return false;
+	}
+
+	private function mobileCJustReleased(keys:Array<MobileInputID>):Bool
+	{
+		if (keys != null && requestedMobileC != null)
+			if (requestedMobileC.instance.anyJustReleased(keys))
+				return true;
+
+		return false;
+	}
+
+	@:noCompletion
+	private function get_requestedInstance():Dynamic
+	{
+		if (isInSubstate)
+			return MusicBeatSubstate.instance;
+		else
+			return MusicBeatState.getState();
+	}
+
+	@:noCompletion
+	private function get_requestedMobileC():IMobileControls
+	{
+		return requestedInstance.mobileControls;
+	}
+
+	@:noCompletion
+	private function get_mobileC():Bool
+	{
+		if (ClientPrefs.data.controlsAlpha >= 0.1)
+			return true;
+		else
+			return false;
+	}
+
 	// IGNORE THESE
 	public static var instance:Controls;
 	public function new()
