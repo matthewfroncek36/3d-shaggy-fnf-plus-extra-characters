@@ -324,9 +324,6 @@ class Controls
 	@:noCompletion
 	private function get_requestedInstance():Dynamic
 	{
-		if (isInSubstate)
-			return MusicBeatSubstate.instance;
-		else
 			return MusicBeatState.getState();
 	}
 
