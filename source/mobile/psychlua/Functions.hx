@@ -39,7 +39,7 @@ class MobileFunctions
 	public static function implement(funk:FunkinLua)
 	{
 		var lua:State = funk.lua;
-		Lua_helper.add_callback(lua, 'mobileC', Controls.instance.mobileC);
+		// mobileC removed in this engine version
 
 		Lua_helper.add_callback(lua, 'mobileControlsMode', getMobileControlsAsString());
 
@@ -115,18 +115,12 @@ class MobileFunctions
 				period = 0;
 			return Haptic.vibrate(period, duration);
 		});
-
-		Lua_helper.add_callback(lua, "addTouchPad", (DPadMode:String, ActionMode:String, ?addToCustomSubstate:Bool = false, ?posAtCustomSubstate:Int = -1) ->
-		{
-			PlayState.instance.makeLuaTouchPad(DPadMode, ActionMode);
-			if (addToCustomSubstate)
-			{
-				if (PlayState.instance.luaTouchPad != null || !PlayState.instance.members.contains(PlayState.instance.luaTouchPad))
-					CustomSubstate.insertLuaTpad(posAtCustomSubstate);
-			}
-			else
-				PlayState.instance.addLuaTouchPad();
-		});
+		
+        Lua_helper.add_callback(lua, "addTouchPad", (DPadMode:String, ActionMode:String, ?addToCustomSubstate:Bool = false, ?posAtCustomSubstate:Int = -1) ->
+        {
+			if (PlayState.instance.luaTouchPad == null)
+                PlayState.instance.addLuaTouchPad();
+        });
 
 		Lua_helper.add_callback(lua, "removeTouchPad", () ->
 		{
@@ -390,7 +384,7 @@ class AndroidFunctions
 		Lua_helper.add_callback(lua, "clipboardSetText", function(?text:String):Void
 		{
 			if (text != null)
-				return FunkinLua.luaTrace('clipboardSetText: No text specified.');
+			    return FunkinLua.luaTrace('clipboardSetText: No text specified.');
 			PsychJNI.clipboardSetText(text);
 		});
 
@@ -399,7 +393,7 @@ class AndroidFunctions
 		Lua_helper.add_callback(lua, "setActivityTitle", function(text:String):Void
 		{
 			if (text != null)
-				return FunkinLua.luaTrace('setActivityTitle: No text specified.');
+			    return FunkinLua.luaTrace('setActivityTitle: No text specified.');
 			PsychJNI.setActivityTitle(text);
 		});
 	}

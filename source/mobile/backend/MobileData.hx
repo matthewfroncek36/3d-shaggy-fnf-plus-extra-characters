@@ -27,6 +27,7 @@ import haxe.Json;
 import haxe.io.Path;
 import openfl.utils.Assets;
 import flixel.util.FlxSave;
+import sys.FileSystem;
 
 /**
  * ...
@@ -106,7 +107,7 @@ class MobileData
 	{
 		// Dynamic Controls Color
 		var data:Dynamic;
-		if (ClientPrefs.data.dynamicColors)
+		if (true)
 			data = ClientPrefs.data;
 		else
 			data = ClientPrefs.defaultData;
@@ -130,7 +131,7 @@ class MobileData
 		folder = folder.contains(':') ? folder.split(':')[1] : folder;
 
 		#if MODS_ALLOWED if (FileSystem.exists(folder)) #end
-		for (file in Paths.readDirectory(folder))
+		for (file in FileSystem.readDirectory(folder))
 		{
 			var fileWithNoLib:String = file.contains(':') ? file.split(':')[1] : file;
 			if (Path.extension(fileWithNoLib) == 'json')

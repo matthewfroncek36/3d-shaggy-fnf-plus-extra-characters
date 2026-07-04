@@ -35,7 +35,9 @@ import openfl.filters.ShaderFilter;
 
 import shaders.ErrorHandledShader;
 
+#if (VIDEOS_ALLOWED && cpp)
 import objects.VideoSprite;
+#end
 import objects.Note.EventNote;
 import objects.*;
 import states.stages.*;
@@ -4025,4 +4027,16 @@ class PlayState extends MusicBeatState
 		#end
 		return false;
 	}
+
+	public var luaTouchPad:Dynamic = null;
+
+	public function addLuaTouchPad():Void {}
+	public function removeLuaTouchPad():Void {}
+	public function addLuaTouchPadCamera():Void {}
+
+	public function luaTouchPadJustPressed(button:Int):Bool return false;
+	public function luaTouchPadPressed(button:Int):Bool return false;
+	public function luaTouchPadJustReleased(button:Int):Bool return false;
+	public function luaTouchPadReleased(button:Int):Bool return false;
+
 }

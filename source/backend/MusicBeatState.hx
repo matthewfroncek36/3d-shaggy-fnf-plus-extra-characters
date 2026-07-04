@@ -47,7 +47,7 @@ class MusicBeatState extends FlxState
 
 	public function addMobileControls(defaultDrawTarget:Bool = false):Void
 	{
-		var extraMode = MobileData.extraActions.get(ClientPrefs.data.extraButtons);
+		var extraMode = MobileData.extraActions.get("NONE");
 
 		switch (MobileData.mode)
 		{
