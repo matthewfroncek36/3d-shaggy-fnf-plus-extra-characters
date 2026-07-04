@@ -140,7 +140,7 @@ jobs:
           chmod +x ./setup/unix.sh
           sh ./setup/unix.sh
           haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-androidtools.git
-          haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-videoview.git
+          haxelib install extension-videoview
           haxelib remove linc_luajit
           haxelib git linc_luajit https://github.com/jigsaw-4277821/linc_luajit.git
 
@@ -179,7 +179,7 @@ jobs:
           haxelib install hxcpp > /dev/null --quiet
           chmod +x ./setup/unix.sh
           sh ./setup/unix.sh
-          haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-videoview.git
+          haxelib install extension-videoview
           haxelib remove linc_luajit
           haxelib git linc_luajit https://github.com/jigsaw-4277821/linc_luajit.git
 
