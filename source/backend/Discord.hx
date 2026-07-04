@@ -72,7 +72,7 @@ var discordHandlers:DiscordEventHandlers = new DiscordEventHandlers();
 		discordHandlers.ready = cpp.Function.fromStaticFunction(onReady);
 		discordHandlers.disconnected = cpp.Function.fromStaticFunction(onDisconnected);
 		discordHandlers.errored = cpp.Function.fromStaticFunction(onError);
-Discord.Initialize(clientID, cpp.RawPointer.addressOf(discordHandlers), 1, false);
+        Discord.Initialize(clientID, cpp.RawPointer.addressOf(discordHandlers), true, false);
 
 		if(!isInitialized) trace("Discord Client initialized");
 
