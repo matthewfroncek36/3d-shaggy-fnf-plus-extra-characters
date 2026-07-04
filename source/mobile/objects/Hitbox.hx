@@ -36,8 +36,8 @@ import openfl.geom.Matrix;
  */
 class Hitbox extends MobileInputManager implements IMobileControls
 {
-	final offsetFir:Int = ((ClientPrefs.data.hitboxmode != "Static") ? Std.int(FlxG.height / 4) * 3 : 0);
-	final offsetSec:Int = ((ClientPrefs.data.hitboxmode != "Static") ? 0 : Std.int(FlxG.height / 4));
+	final offsetFir:Int = ((ClientPrefs.data.hitboxmode) ? Std.int(FlxG.height / 4) * 3 : 0);
+	final offsetSec:Int = ((ClientPrefs.data.hitboxmode) ? 0 : Std.int(FlxG.height / 4));
 
 	public var buttonLeft:TouchButton = new TouchButton(0, 0, [MobileInputID.HITBOX_LEFT, MobileInputID.NOTE_LEFT]);
 	public var buttonDown:TouchButton = new TouchButton(0, 0, [MobileInputID.HITBOX_DOWN, MobileInputID.NOTE_DOWN]);
@@ -128,14 +128,14 @@ class Hitbox extends MobileInputManager implements IMobileControls
 		hint.loadGraphic(createHintGraphic(Width, Height));
 
 		hint.label = new FlxSprite();
-		hint.labelStatusDiff = (ClientPrefs.data.hitboxmode != "Hidden") ? ClientPrefs.data.controlsAlpha : 0.00001;
+		hint.labelStatusDiff = (ClientPrefs.data.hitboxmode) ? ClientPrefs.data.controlsAlpha : 0.00001;
 		hint.label.loadGraphic(createHintGraphic(Width, Math.floor(Height * 0.035), true));
-		if ((ClientPrefs.data.hitboxmode != "Static"))
+		if ((ClientPrefs.data.hitboxmode))
 			hint.label.offset.y -= (hint.height - hint.label.height) / 2;
 		else
 			hint.label.offset.y += (hint.height - hint.label.height) / 2;
 
-		if (ClientPrefs.data.hitboxmode != "Hidden")
+		if (ClientPrefs.data.hitboxmode)
 		{
 			var hintTween:FlxTween = null;
 			var hintLaneTween:FlxTween = null;
@@ -191,7 +191,7 @@ class Hitbox extends MobileInputManager implements IMobileControls
 		hint.immovable = hint.multiTouch = true;
 		hint.solid = hint.moves = false;
 		hint.alpha = 0.00001;
-		hint.label.alpha = (ClientPrefs.data.hitboxmode != "Hidden") ? ClientPrefs.data.controlsAlpha : 0.00001;
+		hint.label.alpha = (ClientPrefs.data.hitboxmode) ? ClientPrefs.data.controlsAlpha : 0.00001;
 		hint.canChangeLabelAlpha = false;
 		hint.label.antialiasing = hint.antialiasing = ClientPrefs.data.antialiasing;
 		hint.color = Color;
@@ -206,7 +206,7 @@ class Hitbox extends MobileInputManager implements IMobileControls
 		var shape:Shape = new Shape();
 		shape.graphics.beginFill(0xFFFFFF);
 
-		if (ClientPrefs.data.hitboxmode == "No Gradient")
+		if (ClientPrefs.data.hitboxmode)
 		{
 			var matrix:Matrix = new Matrix();
 			matrix.createGradientBox(Width, Height, 0, 0, 0);
@@ -218,7 +218,7 @@ class Hitbox extends MobileInputManager implements IMobileControls
 			shape.graphics.drawRect(0, 0, Width, Height);
 			shape.graphics.endFill();
 		}
-		else if (ClientPrefs.data.hitboxmode == "No Gradient (Old)")
+		else if (!ClientPrefs.data.hitboxmode)
 		{
 			shape.graphics.lineStyle(10, 0xFFFFFF, 1);
 			shape.graphics.drawRect(0, 0, Width, Height);

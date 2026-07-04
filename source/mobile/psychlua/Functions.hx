@@ -118,11 +118,10 @@ class MobileFunctions
 
 		Lua_helper.add_callback(lua, "addTouchPad", (DPadMode:String, ActionMode:String, ?addToCustomSubstate:Bool = false, ?posAtCustomSubstate:Int = -1) ->
 		{
-			PlayState.instance.addLuaTouchPad(DPadMode, ActionMode);
+			PlayState.instance.addLuaTouchPad();
 			if (addToCustomSubstate)
 			{
 				if (PlayState.instance.luaTouchPad != null || !PlayState.instance.members.contains(PlayState.instance.luaTouchPad))
-					CustomSubstate.insertLuaTouchPad(posAtCustomSubstate);
 			}
 			else
 				PlayState.instance.addLuaTouchPad();

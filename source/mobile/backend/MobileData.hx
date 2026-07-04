@@ -107,7 +107,7 @@ class MobileData
 	{
 		// Dynamic Controls Color
 		var data:Dynamic;
-		if (ClientPrefs.data.dynamicNotes)
+		if (true)
 			data = ClientPrefs.data;
 		else
 			data = ClientPrefs.defaultData;
