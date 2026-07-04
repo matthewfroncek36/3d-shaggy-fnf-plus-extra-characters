@@ -43,8 +43,6 @@ class FlashingState extends MusicBeatState
 			button.x += (128 * i) - 80;
 			texts.add(button);
 		}
-
-		addTouchPad("LEFT_RIGHT", "A_B");
 		touchPad.alpha = 0;
 
 		FlxTween.tween(texts, {alpha: 1.0}, 0.5, {
