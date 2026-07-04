@@ -39,7 +39,7 @@ class MobileFunctions
 	public static function implement(funk:FunkinLua)
 	{
 		var lua:State = funk.lua;
-		// // Lua_helper.add_callback(lua, 'mobileC', Controls.instance.mobileC); // auto-disabled // auto-disabled
+		Lua_helper.add_callback(lua, 'mobileC', Controls.instance.mobileC);
 
 		Lua_helper.add_callback(lua, 'mobileControlsMode', getMobileControlsAsString());
 
@@ -122,7 +122,7 @@ class MobileFunctions
 			if (addToCustomSubstate)
 			{
 				if (PlayState.instance.luaTouchPad != null || !PlayState.instance.members.contains(PlayState.instance.luaTouchPad))
-					CustomSubstate.insertLuaTouchPad(posAtCustomSubstate);
+					CustomSubstate.insertLuaTpad(posAtCustomSubstate);
 			}
 			else
 				PlayState.instance.addLuaTouchPad();

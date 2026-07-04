@@ -1,205 +1,54 @@
-name: Build Psych Engine
+name: Main
 
-on:
-  workflow_dispatch:
-  push:
-    branches: [ main, lol ]
-  pull_request:
-    branches: [ main, lol ]
+on: workflow_dispatch
 
 jobs:
-  windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.3.3
-
-      - name: Install Haxelib Dependencies
-        run: |
-          haxelib setup C:/haxelib
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.6.1
-          haxelib install flixel-addons 3.2.2
-          haxelib install flixel-tools 1.5.1
-          haxelib install hscript-iris 1.1.3
-          haxelib install tjson 1.4.0
-          haxelib install hxdiscord_rpc 1.2.4
-          haxelib install hxvlc 2.0.1 --skip-dependencies
-          haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate 
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit 1906c4a96f6bb6df66562b3f24c62f4c5bba14a7
-          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cdc4632397ef3504d464e90
-          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666
-
-      - name: Build Windows
-        run: haxelib run lime build windows -release --app-version="${{ github.run_id }}"
-
-      - name: Upload Windows Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: Windows-Build
-          path: export/release/windows/bin/
-
-  linux:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.3.3
-
-      - name: Install System Dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y libgl1-mesa-dev libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
-
-      - name: Install Haxelib Dependencies
-        run: |
-          haxelib setup ~/haxelib
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.6.1
-          haxelib install flixel-addons 3.2.2
-          haxelib install flixel-tools 1.5.1
-          haxelib install hscript-iris 1.1.3
-          haxelib install tjson 1.4.0
-          haxelib install hxdiscord_rpc 1.2.4
-          haxelib install hxvlc 2.0.1 --skip-dependencies
-          haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate 
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit 1906c4a96f6bb6df66562b3f24c62f4c5bba14a7
-          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cdc4632397ef3504d464e90
-          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666
-
-      - name: Build Linux
-        run: haxelib run lime build linux -release --app-version="${{ github.run_id }}"
-
-      - name: Upload Linux Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: Linux-Build
-          path: export/release/linux/bin/
-
-  android:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.3.3
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Haxelib Dependencies
-        run: |
-          haxelib setup ~/haxelib
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.6.1
-          haxelib install flixel-addons 3.2.2
-          haxelib install flixel-tools 1.5.1
-          haxelib install hscript-iris 1.1.3
-          haxelib install tjson 1.4.0
-          haxelib install hxdiscord_rpc 1.2.4
-          haxelib install hxvlc 2.0.1 --skip-dependencies
-          haxelib install extension-videoview
-          haxelib install extension-androidtools
-          haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate 
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit 1906c4a96f6bb6df66562b3f24c62f4c5bba14a7
-          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cdc4632397ef3504d464e90
-          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666
-
-      - name: Build Android
-        run: haxelib run lime build android -release --app-version="${{ github.run_id }}"
-
-      - name: Upload Android Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: Android-Build
-          path: export/release/android/bin/
-
-  mac:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.3.3
-
-      - name: Install Haxelib Dependencies
-        run: |
-          haxelib setup ~/haxelib
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.6.1
-          haxelib install flixel-addons 3.2.2
-          haxelib install flixel-tools 1.5.1
-          haxelib install hscript-iris 1.1.3
-          haxelib install tjson 1.4.0
-          haxelib install hxdiscord_rpc 1.2.4
-          haxelib install hxvlc 2.0.1 --skip-dependencies
-          haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate 
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit 1906c4a96f6bb6df66562b3f24c62f4c5bba14a7
-          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cdc4632397ef3504d464e90
-          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666
-
-      - name: Build macOS (Universal)
-        run: haxelib run lime build mac -release --app-version="${{ github.run_id }}"
-
-      - name: Upload macOS Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: macOS-Build
-          path: export/release/macos/bin/
-
-  ios:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.3.3
-
-      - name: Install Haxelib Dependencies
-        run: |
-          haxelib setup ~/haxelib
-          haxelib install lime 8.1.2
-          haxelib install openfl 9.3.3
-          haxelib install flixel 5.6.1
-          haxelib install flixel-addons 3.2.2
-          haxelib install flixel-tools 1.5.1
-          haxelib install hscript-iris 1.1.3
-          haxelib install tjson 1.4.0
-          haxelib install hxdiscord_rpc 1.2.4
-          haxelib install hxvlc 2.0.1 --skip-dependencies
-          haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate
-          haxelib git linc_luajit https://github.com/superpowers04/linc_luajit 1906c4a96f6bb6df66562b3f24c62f4c5bba14a7
-          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cdc4632397ef3504d464e90
-          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666
-
-      - name: Build iOS (Unsigned IPA)
-        run: haxelib run lime build ios -release --app-version="${{ github.run_id }}"
-
-      - name: Upload iOS Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: iOS-Build
-          path: export/release/ios/build/
+  Build:
+    name: ${{ matrix.name }}
+    strategy:
+      matrix:
+        include:
+          - name: Windows
+            os: windows-2022
+            buildArgs: windows
+            setupCommand: .\"setup/windows.bat"
+            artifactName: windowsBuild-x86_64
+            artifactPath: export\release\windows\bin\*
+          - name: Linux
+            os: ubuntu-22.04
+            buildArgs: linux
+            setupCommand: sh ./setup/unix.sh
+            artifactName: linuxBuild-x86_64
+            artifactPath: export/release/linux/bin/*
+          - name: macOS x86_64
+            os: macos-15
+            setupCommand: sh ./setup/unix.sh
+            buildArgs: "mac -64 -D HXCPP_M64"
+            artifactName: macOSBuild-x86_64
+            artifactPath: export/release/macos/bin/*
+          - name: macOS ARM64
+            os: macos-15
+            setupCommand: sh ./setup/unix.sh
+            buildArgs: "mac -arm64 -D HXCPP_ARM64"
+            artifactName: macOSBuild-arm64
+            artifactPath: export/release/macos/bin/*
+          - name: Android
+            os: macos-15
+            buildArgs: "android -ONLY_ARMV7"
+            setupCommand: sh ./setup/unix.sh
+            artifactName: androidBuild
+            artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
+          - name: iOS
+            os: macos-15
+            buildArgs: "ios -nosign"
+            setupCommand: sh ./setup/unix.sh
+            artifactName: iOSBuild
+            artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
+    uses: ./.github/workflows/build.yml
+    with:
+        name: ${{ matrix.name }}
+        os: ${{ matrix.os }}
+        buildArgs: ${{ matrix.buildArgs }}
+        setupCommand: ${{ matrix.setupCommand }}
+        artifactName: ${{ matrix.artifactName }}
+        artifactPath: ${{ matrix.artifactPath }}
