@@ -53,7 +53,7 @@ class MobileControls extends FlxTypedSpriteGroup<MobileInputManager>
 
 	private function initControler(controlMode:Int = 0, ?extra:Bool = true):Void
 	{
-		var extraAction = MobileData.extraActions.get(ClientPrefs.data.extraButtons);
+		var extraAction = MobileData.extraActions.get(ClientPrefs.data.extraButton);
 		if (!extra)
 			extraAction = NONE;
 		switch (controlMode)
