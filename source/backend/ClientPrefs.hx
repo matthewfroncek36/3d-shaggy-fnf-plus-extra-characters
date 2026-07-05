@@ -162,7 +162,7 @@ class ClientPrefs {
 		'debug_1'		=> [SEVEN],
 		'debug_2'		=> [EIGHT]
 	];
-		public static var keyBinds:Map<String, Array<FlxKey>> = [
+	public static var mobileBinds:Map<String, Array<MobileInputID>> = [
 		//Key Bind, Name for ControlsSubState
 		'note_up'		=> [W, UP],
 		'note_left'		=> [A, LEFT],
