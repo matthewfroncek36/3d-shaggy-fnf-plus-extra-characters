@@ -162,6 +162,64 @@ class ClientPrefs {
 		'debug_1'		=> [SEVEN],
 		'debug_2'		=> [EIGHT]
 	];
+		public static var keyBinds:Map<String, Array<FlxKey>> = [
+		//Key Bind, Name for ControlsSubState
+		'note_up'		=> [W, UP],
+		'note_left'		=> [A, LEFT],
+		'note_down'		=> [S, DOWN],
+		'note_right'	=> [D, RIGHT],
+		'note_one1'		=> [SPACE],
+		'note_two1'		=> [D],
+		'note_two2'		=> [K],
+		'note_three1'	=> [D],
+		'note_three2'	=> [SPACE],
+		'note_three3'	=> [K],
+		'note_five1'	=> [D],
+		'note_five2'	=> [F],
+		'note_five3'	=> [SPACE],
+		'note_five4'	=> [J],
+		'note_five5'	=> [K],
+		'note_six1'		=> [S],
+		'note_six2'		=> [D],
+		'note_six3'		=> [F],
+		'note_six4'		=> [J],
+		'note_six5'		=> [K],
+		'note_six6'		=> [L],
+		'note_seven1'	=> [S],
+		'note_seven2'	=> [D],
+		'note_seven3'	=> [F],
+		'note_seven4'	=> [SPACE],
+		'note_seven5'	=> [J],
+		'note_seven6'	=> [K],
+		'note_seven7'	=> [L],
+		'note_eight1'	=> [A],
+		'note_eight2'	=> [S],
+		'note_eight3'	=> [D],
+		'note_eight4'	=> [F],
+		'note_eight5'	=> [H],
+		'note_eight6'	=> [J],
+		'note_eight7'	=> [K],
+		'note_eight8'	=> [L],
+		'note_nine1'	=> [A],
+		'note_nine2'	=> [S],
+		'note_nine3'	=> [D],
+		'note_nine4'	=> [F],
+		'note_nine5'	=> [SPACE],
+		'note_nine6'	=> [H],
+		'note_nine7'	=> [J],
+		'note_nine8'	=> [K],
+		'note_nine9'	=> [L],
+		
+		'ui_up'			=> [W, UP],
+		'ui_left'		=> [A, LEFT],
+		'ui_down'		=> [S, DOWN],
+		'ui_right'		=> [D, RIGHT],
+
+		'accept'		=> [A],
+		'back'			=> [B],
+		'pause'			=> [#if android NONE #else P #end],
+		'reset'			=> [NONE]
+	];
 	public static var gamepadBinds:Map<String, Array<FlxGamepadInputID>> = [
 		'note_up'		=> [DPAD_UP, Y],
 		'note_left'		=> [DPAD_LEFT, X],
@@ -180,6 +238,7 @@ class ClientPrefs {
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 	public static var defaultButtons:Map<String, Array<FlxGamepadInputID>> = null;
+	public static var defaultMobileBinds:Map<String, Array<MobileInputID>> = null;
 
 	public static function resetKeys(controller:Null<Bool> = null) //Null = both, False = Keyboard, True = Controller
 	{
@@ -198,14 +257,17 @@ class ClientPrefs {
 	{
 		var keyBind:Array<FlxKey> = keyBinds.get(key);
 		var gamepadBind:Array<FlxGamepadInputID> = gamepadBinds.get(key);
+		var mobileBind:Array<MobileInputID> = mobileBinds.get(key);
 		while(keyBind != null && keyBind.contains(NONE)) keyBind.remove(NONE);
 		while(gamepadBind != null && gamepadBind.contains(NONE)) gamepadBind.remove(NONE);
+		while(mobileBind != null && mobileBind.contains(NONE)) mobileBind.remove(NONE);
 	}
 
 	public static function loadDefaultKeys()
 	{
 		defaultKeys = keyBinds.copy();
 		defaultButtons = gamepadBinds.copy();
+		defaultMobileBinds = mobileBinds.copy();
 	}
 
 	public static function saveSettings() {
@@ -220,6 +282,7 @@ class ClientPrefs {
 		save.bind('controls_v3', CoolUtil.getSavePath());
 		save.data.keyboard = keyBinds;
 		save.data.gamepad = gamepadBinds;
+		save.data.mobile = mobileBinds;
 		save.flush();
 		FlxG.log.add("Settings saved!");
 	}
@@ -285,6 +348,11 @@ class ClientPrefs {
 				var loadedControls:Map<String, Array<FlxGamepadInputID>> = save.data.gamepad;
 				for (control => keys in loadedControls)
 					if(gamepadBinds.exists(control)) gamepadBinds.set(control, keys);
+			}
+			if(save.data.mobile != null) {
+				var loadedControls:Map<String, Array<MobileInputID>> = save.data.mobile;
+				for (control => keys in loadedControls)
+					if(mobileBinds.exists(control)) mobileBinds.set(control, keys);
 			}
 			reloadVolumeKeys();
 		}
